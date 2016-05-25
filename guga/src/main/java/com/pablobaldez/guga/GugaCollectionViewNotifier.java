@@ -67,6 +67,7 @@ public class GugaCollectionViewNotifier<T> extends GugaViewNotifier<T> {
      */
     public ListActionSubscriber<T> subscriberToInsertData(int initialPosition, Action1<Collection<T>> onLoadAll) {
         LinkedList<T> dataSet = new LinkedList<>();
+
         return super.subscriberToChangeLoadState(dataSet::add)
                 .addOnCompletedAction(() -> onLoadAll.call(dataSet))
                 .addOnCompletedAction(() -> view.notifyDataInserted(initialPosition, dataSet.size()));

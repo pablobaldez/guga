@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 
 /**
  * Created by pablobaldez on 5/12/16.
+ * Fragment that shows a list to user using recyclerview 
  */
 public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
         extends GugaFragment

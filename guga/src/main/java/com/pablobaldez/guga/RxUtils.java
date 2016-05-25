@@ -9,10 +9,14 @@ import rx.schedulers.Schedulers;
  */
 public final class RxUtils {
 
-    public static <U> Observable<U> saveMainThread(Observable<U> observable) {
+    public static <T> Observable<T> saveMainThread(Observable<T> observable) {
         return observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static <T> Observable<T> saveMainThreadIntoLifecycle(Observable<T> observable, GugaMvpView view){
+        return saveMainThread(view.bindIntoLifecycle(observable));
     }
 
     private RxUtils() {

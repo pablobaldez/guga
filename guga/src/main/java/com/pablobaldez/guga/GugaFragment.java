@@ -28,7 +28,7 @@ public abstract class GugaFragment extends Fragment implements GugaMvpView {
 
     @Override
     public void setLoadingState(boolean loadingState) {
-        loadingState = loadingState;
+        this.loadingState = loadingState;
     }
 
     public boolean isLoadingState() {

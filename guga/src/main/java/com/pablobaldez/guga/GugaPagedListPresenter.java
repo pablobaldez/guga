@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import static com.pablobaldez.guga.RxUtils.saveMainThread;
+import static com.pablobaldez.guga.RxUtils.saveMainThreadIntoLifecycle;
 
 /**
  * Created by pablobaldez on 5/12/16.
@@ -30,14 +30,14 @@ public abstract class GugaPagedListPresenter<T> implements PagedDataProvider {
 
     public void refreshData() {
         page = 0;
-        saveMainThread(view.bindIntoLifecycle(fillData()))
+        saveMainThreadIntoLifecycle(fillData(), view)
                 .subscribe(notifier.subscriberToRefreshDataSet(list -> this.list = list));
     }
 
     @Override
     public void loadMore() {
         page++;
-        saveMainThread(view.bindIntoLifecycle(fillData()))
+        saveMainThreadIntoLifecycle(fillData(), view)
                 .subscribe(notifier.subscriberToInsertData(list::addAll));
     }
 
