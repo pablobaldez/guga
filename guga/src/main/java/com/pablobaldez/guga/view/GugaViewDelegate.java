@@ -4,25 +4,15 @@ import android.app.Activity;
 import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerView;
-import com.jakewharton.rxbinding.view.RxView;
-import com.jakewharton.rxbinding.widget.RxTextView;
-import com.jakewharton.rxbinding.widget.TextViewEditorActionEvent;
-import com.trello.navi.NaviComponent;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-import rx.Subscriber;
-import rx.functions.Action0;
 
 /**
  * @author Pablo
@@ -39,11 +29,23 @@ public class GugaViewDelegate {
     }
 
     public void onViewCreated(View view){
-
+        RxGugaView.setLoading(this).subscribe();
     }
 
     public void addViewsToDisableWhenLoad(View... views) {
         RxRecyclerView.scrollEvents((RecyclerView) views[0]).subscribe();
+    }
+
+    public void setLoading() {
+        // call
+    }
+
+    public void addSetLoadingStateListener(SetLoadingStateListener listener) {
+        RxGugaView.setLoading(this).subscribe();
+    }
+
+    public void removeSetLoadingStateListener(SetLoadingStateListener listener) {
+
     }
 
     @IntDef(
