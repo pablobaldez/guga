@@ -1,4 +1,4 @@
-package com.pablobaldez.guga;
+package com.pablobaldez.guga.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;

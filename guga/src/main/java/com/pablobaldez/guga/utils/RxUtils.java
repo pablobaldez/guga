@@ -1,4 +1,8 @@
-package com.pablobaldez.guga;
+package com.pablobaldez.guga.utils;
+
+import com.pablobaldez.guga.view.GugaMvpView;
+import com.trello.navi.Event;
+import com.trello.navi.rx.RxNavi;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -16,7 +20,7 @@ public final class RxUtils {
     }
 
     public static <T> Observable<T> saveMainThreadIntoLifecycle(Observable<T> observable, GugaMvpView view){
-        return saveMainThread(view.bindIntoLifecycle(observable));
+        return saveMainThread(observable.takeUntil(RxNavi.observe(view, Event.DESTROY)));
     }
 
     private RxUtils() {

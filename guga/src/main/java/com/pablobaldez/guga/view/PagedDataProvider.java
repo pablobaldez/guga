@@ -1,4 +1,4 @@
-package com.pablobaldez.guga;
+package com.pablobaldez.guga.view;
 
 /**
  * Created by pablobaldez on 5/12/16.

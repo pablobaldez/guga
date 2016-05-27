@@ -1,4 +1,7 @@
-package com.pablobaldez.guga;
+package com.pablobaldez.guga.presenter;
+
+import com.pablobaldez.guga.utils.ListActionSubscriber;
+import com.pablobaldez.guga.view.GugaCollectionMvpView;
 
 import java.util.ArrayList;
 import java.util.Collection;
