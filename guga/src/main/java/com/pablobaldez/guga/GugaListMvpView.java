@@ -4,7 +4,7 @@ package com.pablobaldez.guga;
  * Created by pablobaldez on 5/10/16.
  * View that handles a list
  */
-public interface GugaCollectionMvpView extends GugaMvpView {
+public interface GugaListMvpView extends GugaMvpView {
 
     /**
      * Called when the current data set was cleaned and a new one was refreshed

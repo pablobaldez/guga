@@ -16,15 +16,15 @@ public class GugaCollectionViewNotifier<T> extends GugaViewNotifier<T> {
 
     public static final int INITIAL_ARRAY_SIZE = 12;
 
-    public final GugaCollectionMvpView view;
+    public final GugaListMvpView view;
     public int initialArraySize;
 
 
-    public GugaCollectionViewNotifier(GugaCollectionMvpView view){
+    public GugaCollectionViewNotifier(GugaListMvpView view){
         this(view, INITIAL_ARRAY_SIZE);
     }
 
-    public GugaCollectionViewNotifier(GugaCollectionMvpView view, int initialArraySize){
+    public GugaCollectionViewNotifier(GugaListMvpView view, int initialArraySize){
         super(view);
         this.view = view;
         this.initialArraySize = initialArraySize;
@@ -53,32 +53,14 @@ public class GugaCollectionViewNotifier<T> extends GugaViewNotifier<T> {
     /**
      * Create a subscriber to insert data into the data set when subscribed
      * @param initialPosition initial position to insert data
-     * @return Subscriber that will execute the predefined action
-     */
-    public ListActionSubscriber<T> subscriberToInsertData(int initialPosition) {
-        return subscriberToInsertData(initialPosition, list -> {/*do nothing*/});
-    }
-
-    /**
-     * Create a subscriber to insert data into the data set when subscribed
-     * @param initialPosition initial position to insert data
      * @param onLoadAll called when all items are loaded and before to notify the view
      * @return Subscriber that will execute the predefined action
      */
     public ListActionSubscriber<T> subscriberToInsertData(int initialPosition, Action1<Collection<T>> onLoadAll) {
         LinkedList<T> dataSet = new LinkedList<>();
-
         return super.subscriberToChangeLoadState(dataSet::add)
                 .addOnCompletedAction(() -> onLoadAll.call(dataSet))
                 .addOnCompletedAction(() -> view.notifyDataInserted(initialPosition, dataSet.size()));
-    }
-
-    /**
-     * Create a subscriber to insert data into the data set when subscribed
-     * @return Subscriber that will execute the predefined action
-     */
-    public ListActionSubscriber<T> subscriberToInsertData() {
-        return subscriberToInsertData(list -> {/*do nothing*/});
     }
 
     /**
@@ -91,15 +73,6 @@ public class GugaCollectionViewNotifier<T> extends GugaViewNotifier<T> {
         return super.subscriberToChangeLoadState(dataSet::add)
                 .addOnCompletedAction(() -> onLoadAll.call(dataSet))
                 .addOnCompletedAction(() -> view.notifyDataInserted(dataSet.size()));
-    }
-
-    /**
-     * Create a subscriber to change data when subscribed
-     * @param initialPosition initial position to change data
-     * @return Subscriber that will execute the predefined action
-     */
-    public ListActionSubscriber<T> subscriberToChangeData(int initialPosition) {
-        return subscriberToChangeData(initialPosition, t -> {/*do nothing*/});
     }
 
     /**

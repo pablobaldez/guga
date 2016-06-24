@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
  */
 public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
         extends GugaFragment
-        implements GugaCollectionMvpView, GugaDelegatedAdapter.Delegate<VH> {
+        implements GugaListMvpView, GugaDelegatedAdapter.Delegate<VH> {
 
     private int itemCount = 0;
     private RecyclerView.Adapter<VH> adapter;
