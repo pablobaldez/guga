@@ -5,15 +5,9 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerView;
-import com.jakewharton.rxbinding.view.RxView;
 import com.pablobaldez.guga.R;
 import com.pablobaldez.guga.utils.ToastMessageManager;
 import com.trello.navi.component.NaviFragment;
-import com.trello.navi.internal.NaviEmitter;
-import com.trello.navi.rx.RxNavi;
-
-import java.util.LinkedList;
 
 /**
  * Created by pablobaldez on 5/12/16.

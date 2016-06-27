@@ -9,11 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.jakewharton.rxbinding.support.v7.widget.RecyclerViewScrollEvent;
-import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerView;
 import com.pablobaldez.guga.R;
-
-import rx.Subscriber;
 
 /**
  * Created by pablobaldez on 5/12/16.
