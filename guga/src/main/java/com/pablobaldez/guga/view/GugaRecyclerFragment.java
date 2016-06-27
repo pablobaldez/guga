@@ -3,13 +3,16 @@ package com.pablobaldez.guga.view;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
+import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerViewAdapter;
 import com.pablobaldez.guga.R;
+import com.trello.navi.Event;
+import com.trello.navi.rx.RxNavi;
 
 /**
  * Created by pablobaldez on 5/12/16.
@@ -23,14 +26,13 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
     private RecyclerView.Adapter<VH> adapter;
 
     public RecyclerView recyclerView;
-    public ProgressBar progressBar;
-
     private View emptyView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = createAdapter();
+
     }
 
     @Nullable
@@ -42,15 +44,33 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = findRecyclerView(view);
-
+        findViews(view);
     }
 
-    //ADAPTER METHODS-------------------------------------------------------------------------------
+    public void findViews(View view) {
+        recyclerView = findRecyclerView(view);
+        emptyView = findRecyclerView(view);
+    }
+
+    public void setUpRecyclerView() {
+        recyclerView.setLayoutManager(createLayoutManager());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(false);
+        RxRecyclerViewAdapter
+                .dataChanges(adapter)
+                .takeUntil(RxNavi.observe(this, Event.STOP))
+                .subscribe(
+                        vh -> {
+                            setEmptyViewVisible(getItemCount() == 0);
+                        }
+                );
+    }
+
     @Override
     public void notifyDataSetRefreshed(int itemCount) {
         this.itemCount = itemCount;
         adapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -83,8 +103,6 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
         return 0;
     }
 
-
-    //OWN METHODS-----------------------------------------------------------------------------------
     @NonNull
     public RecyclerView findRecyclerView(View view) {
         return (RecyclerView) view.findViewById(R.id.guga_recycler_view);
@@ -99,5 +117,23 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
     @NonNull
     public RecyclerView.Adapter<VH> createAdapter() {
         return new GugaDelegatedAdapter(this);
+    }
+
+    /**
+     * @return layoutmanager used in this fragment
+     */
+    @NonNull
+    public RecyclerView.LayoutManager createLayoutManager() {
+        return new LinearLayoutManager(getActivity());
+    }
+
+    protected void setEmptyViewVisible(boolean toVisible){
+        if (toVisible) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.pablobaldez.guga.subscribers;
 
 import com.pablobaldez.guga.view.GugaListMvpView;
 
+import java.util.List;
+
 import rx.functions.Action1;
 
 /**
@@ -11,21 +13,17 @@ import rx.functions.Action1;
 public class GugaEditListSubscriber<T> extends GugaListViewSubscriber<T> {
 
 
-    public GugaEditListSubscriber(GugaListMvpView view) {
-        super(view);
+    public GugaEditListSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList) {
+        super(view, onCompleteList);
     }
 
-    public GugaEditListSubscriber(GugaListMvpView view, Action1<T> onNextAction) {
-        super(view, onNextAction);
-    }
-
-    public GugaEditListSubscriber(GugaListMvpView view, Action1<T> onNextAction, int initialPosition) {
-        super(view, onNextAction, initialPosition);
+    public GugaEditListSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList, int initialPosition) {
+        super(view, onCompleteList, initialPosition);
     }
 
     @Override
     public void onCompleted() {
         super.onCompleted();
-        getView().notifyDataChanged(getInitialPosition(), getOnNextCount());
+        getView().notifyDataChanged(getInitialPosition(), getList().size());
     }
 }

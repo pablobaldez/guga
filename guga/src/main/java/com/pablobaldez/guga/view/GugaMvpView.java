@@ -3,8 +3,9 @@ package com.pablobaldez.guga.view;
 import com.trello.navi.NaviComponent;
 
 /**
- * Created by pablobaldez on 5/10/16.
  * Basic view. Could be a fragment, activity or an android view
+ * @author pablobaldez
+ * @since 5/10/16
  */
 public interface GugaMvpView extends NaviComponent{
 
@@ -13,6 +14,8 @@ public interface GugaMvpView extends NaviComponent{
      * @param loadingState the new state of view
      */
     void setLoadingState(boolean loadingState);
+
+    boolean isLoadingState();
 
     /**
      * Show some generic message for uninteresting errors/exceptions

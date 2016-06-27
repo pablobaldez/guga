@@ -2,6 +2,8 @@ package com.pablobaldez.guga.subscribers;
 
 import com.pablobaldez.guga.view.GugaListMvpView;
 
+import java.util.List;
+
 import rx.functions.Action1;
 
 /**
@@ -10,21 +12,18 @@ import rx.functions.Action1;
  */
 public class GugaRemoveSubscriber<T> extends GugaListViewSubscriber<T> {
 
-    public GugaRemoveSubscriber(GugaListMvpView view) {
-        super(view);
+
+    public GugaRemoveSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList) {
+        super(view, onCompleteList);
     }
 
-    public GugaRemoveSubscriber(GugaListMvpView view, Action1<T> onNextAction) {
-        super(view, onNextAction);
-    }
-
-    public GugaRemoveSubscriber(GugaListMvpView view, Action1<T> onNextAction, int initialPosition) {
-        super(view, onNextAction, initialPosition);
+    public GugaRemoveSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList, int initialPosition) {
+        super(view, onCompleteList, initialPosition);
     }
 
     @Override
     public void onCompleted() {
         super.onCompleted();
-        getView().notifyDataRemoved(getInitialPosition(), getOnNextCount());
+        getView().notifyDataRemoved(getInitialPosition(), getList().size());
     }
 }

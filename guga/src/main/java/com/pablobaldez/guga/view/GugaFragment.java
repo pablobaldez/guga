@@ -10,9 +10,9 @@ import com.pablobaldez.guga.utils.ToastMessageManager;
 import com.trello.navi.component.NaviFragment;
 
 /**
- * Created by pablobaldez on 5/12/16.
- *
  * Base MvpFragment using GugaMvpView and NaviFragment to handle the lifecycle and event methods
+ * @author pablobaldez
+ * @since 5/12/16
  */
 public abstract class GugaFragment extends NaviFragment implements GugaMvpView {
 
@@ -33,32 +33,19 @@ public abstract class GugaFragment extends NaviFragment implements GugaMvpView {
         progressBar = findProgressBar(view);
     }
 
-    /**
-     * Set the default quick message manager to show the
-     * @param quickMessageManager New manager
-     */
-    public void setQuickMessageManager(QuickMessageManager quickMessageManager) {
-        this.quickMessageManager = quickMessageManager;
-    }
-
     @Override
     public void setLoadingState(boolean loadingState) {
         this.loadingState = loadingState;
-        if (progressBar != null) {
-            progressBar.setVisibility(loadingState ? View.VISIBLE : View.GONE);
+        if(isAdded()) {
+            if (progressBar != null) {
+                progressBar.setVisibility(loadingState ? View.VISIBLE : View.GONE);
+            }
         }
     }
 
     @Override
     public void showGenericErrorMessage() {
         quickMessageManager.showMessage("Default error");
-    }
-
-    /**
-     * @return true if the current state of view is loading of false if not
-     */
-    public boolean isLoadingState() {
-        return loadingState;
     }
 
     /**
@@ -71,5 +58,19 @@ public abstract class GugaFragment extends NaviFragment implements GugaMvpView {
         return (ProgressBar) view.findViewById(R.id.guga_progress_bar);
     }
 
+    /**
+     * @return true if the current state of view is loading of false if not
+     */
+    public boolean isLoadingState() {
+        return loadingState;
+    }
+
+    /**
+     * Set the default quick message manager to show the
+     * @param quickMessageManager New manager
+     */
+    public void setQuickMessageManager(QuickMessageManager quickMessageManager) {
+        this.quickMessageManager = quickMessageManager;
+    }
 
 }

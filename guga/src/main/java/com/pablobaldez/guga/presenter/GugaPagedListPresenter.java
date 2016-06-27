@@ -1,11 +1,15 @@
 package com.pablobaldez.guga.presenter;
 
+import com.pablobaldez.guga.subscribers.GugaAddMoreSubscriber;
+import com.pablobaldez.guga.subscribers.GugaRefreshListSubscriber;
+import com.pablobaldez.guga.view.GugaListMvpView;
 import com.pablobaldez.guga.view.PagedDataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
+import rx.Subscriber;
 
 import static com.pablobaldez.guga.utils.RxUtils.saveMainThreadIntoLifecycle;
 
@@ -16,18 +20,12 @@ import static com.pablobaldez.guga.utils.RxUtils.saveMainThreadIntoLifecycle;
 public abstract class GugaPagedListPresenter<T> implements PagedDataProvider {
 
     private final GugaListMvpView view;
-    protected final GugaCollectionViewNotifier<T> notifier;
     protected List<T> list;
 
     private int page = 0;
 
     protected GugaPagedListPresenter(GugaListMvpView view) {
-        this(view, new GugaCollectionViewNotifier<>(view));
-    }
-
-    protected GugaPagedListPresenter(GugaListMvpView view, GugaCollectionViewNotifier<T> notifier) {
         this.view = view;
-        this.notifier = notifier;
         this.list = new ArrayList<>();
     }
 
@@ -36,15 +34,17 @@ public abstract class GugaPagedListPresenter<T> implements PagedDataProvider {
      */
     public void refreshData() {
         page = 0;
+        Subscriber<T> subscriber = new GugaRefreshListSubscriber<>(view, newList -> this.list = newList);
         saveMainThreadIntoLifecycle(fillData(), view)
-                .subscribe(notifier.subscriberToRefreshDataSet(list -> this.list = list));
+                .subscribe(subscriber);
     }
 
     @Override
     public void loadMore() {
         page++;
+        Subscriber<T> subscriber = new GugaAddMoreSubscriber<>(view, list::addAll);
         saveMainThreadIntoLifecycle(fillData(), view)
-                .subscribe(notifier.subscriberToInsertData(list::addAll));
+                .subscribe(subscriber);
     }
 
     public int getPage() {

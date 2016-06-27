@@ -4,8 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 /**
- * Created by pablobaldez on 5/18/16.
  * Delegate all basic methods from adapter to another class. Easy way to use MVP with adapters
+ * @author pablobaldez
+ * @since 5/18/16
  */
 public class GugaDelegatedAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
