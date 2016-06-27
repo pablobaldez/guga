@@ -1,4 +1,4 @@
-package com.pablobaldez.guga;
+package com.pablobaldez.guga.utils;
 
 import java.util.LinkedList;
 import java.util.List;

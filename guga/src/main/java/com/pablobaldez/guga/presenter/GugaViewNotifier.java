@@ -1,4 +1,7 @@
-package com.pablobaldez.guga;
+package com.pablobaldez.guga.presenter;
+
+import com.pablobaldez.guga.utils.ListActionSubscriber;
+import com.pablobaldez.guga.view.GugaMvpView;
 
 import rx.functions.Action0;
 import rx.functions.Action1;

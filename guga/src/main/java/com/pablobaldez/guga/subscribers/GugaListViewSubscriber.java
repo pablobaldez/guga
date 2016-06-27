@@ -1,6 +1,6 @@
 package com.pablobaldez.guga.subscribers;
 
-import com.pablobaldez.guga.GugaListMvpView;
+import com.pablobaldez.guga.view.GugaListMvpView;
 
 import rx.functions.Action1;
 

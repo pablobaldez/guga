@@ -1,9 +1,19 @@
-package com.pablobaldez.guga;
+package com.pablobaldez.guga.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import com.jakewharton.rxbinding.support.v7.widget.RecyclerViewScrollEvent;
+import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerView;
+import com.pablobaldez.guga.R;
+
+import rx.Subscriber;
 
 /**
  * Created by pablobaldez on 5/12/16.
@@ -27,11 +37,20 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
         adapter = createAdapter();
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.guga_recycler_view, container, false);
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        recyclerView = findRecyclerView(view);
+
     }
 
+    //ADAPTER METHODS-------------------------------------------------------------------------------
     @Override
     public void notifyDataSetRefreshed(int itemCount) {
         this.itemCount = itemCount;
@@ -58,14 +77,6 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
         adapter.notifyItemMoved(fromPosition, toPosition);
     }
 
-    public RecyclerView findRecyclerView() {
-        return null;
-    }
-
-    public RecyclerView.Adapter<VH> createAdapter() {
-        return new GugaDelegatedAdapter(this);
-    }
-
     @Override
     public int getItemCount() {
         return itemCount;
@@ -74,5 +85,23 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         return 0;
+    }
+
+
+    //OWN METHODS-----------------------------------------------------------------------------------
+    @NonNull
+    public RecyclerView findRecyclerView(View view) {
+        return (RecyclerView) view.findViewById(R.id.guga_recycler_view);
+    }
+
+    @Nullable
+    public View findEmptyView(View view) {
+        return view.findViewById(R.id.guga_empty_view);
+    }
+
+
+    @NonNull
+    public RecyclerView.Adapter<VH> createAdapter() {
+        return new GugaDelegatedAdapter(this);
     }
 }

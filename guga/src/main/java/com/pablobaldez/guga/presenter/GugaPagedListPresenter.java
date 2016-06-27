@@ -1,10 +1,13 @@
-package com.pablobaldez.guga;
+package com.pablobaldez.guga.presenter;
+
+import com.pablobaldez.guga.view.GugaCollectionMvpView;
+import com.pablobaldez.guga.view.PagedDataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import static com.pablobaldez.guga.RxUtils.saveMainThreadIntoLifecycle;
+import static com.pablobaldez.guga.utils.RxUtils.saveMainThreadIntoLifecycle;
 
 /**
  * Created by pablobaldez on 5/12/16.
