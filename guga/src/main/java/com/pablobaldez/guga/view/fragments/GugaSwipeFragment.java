@@ -25,7 +25,6 @@ public abstract class GugaSwipeFragment<VH extends RecyclerView.ViewHolder>
             new int[]{R.color.swipe_refresh_color_1, R.color.swipe_refresh_color_2,
                     R.color.swipe_refresh_color_3, R.color.swipe_refresh_color_4};
 
-
     public SwipeRefreshLayout swipeRefreshLayout;
     private GugaSwipeWrapper swipeWrapper;
 
@@ -44,7 +43,7 @@ public abstract class GugaSwipeFragment<VH extends RecyclerView.ViewHolder>
 
     public void setUpSwipe() {
         swipeWrapper = new GugaSwipeWrapper(this, recyclerView, emptyView, swipeRefreshLayout);
-        swipeWrapper.setUpSwipe(this, DEFAULT_SCHEME_COLORS);
+        swipeWrapper.setUpSwipe(this);
     }
 
     @Override
