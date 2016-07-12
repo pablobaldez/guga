@@ -7,17 +7,17 @@ import java.util.List;
 import rx.functions.Action1;
 
 /**
+ * Use this class to change a range of items in view
  * @author pablobaldez
  * @since 6/24/16
  */
-public class GugaEditListSubscriber<T> extends GugaListViewSubscriber<T> {
+public class GugaChangeItemSubscriber<T> extends GugaListViewSubscriber<T> {
 
-
-    public GugaEditListSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList) {
+    public GugaChangeItemSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList) {
         super(view, onCompleteList);
     }
 
-    public GugaEditListSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList, int initialPosition) {
+    public GugaChangeItemSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList, int initialPosition) {
         super(view, onCompleteList, initialPosition);
     }
 

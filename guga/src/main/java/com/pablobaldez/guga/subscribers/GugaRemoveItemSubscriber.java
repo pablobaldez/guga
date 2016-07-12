@@ -10,20 +10,20 @@ import rx.functions.Action1;
  * @author pablobaldez
  * @since 6/24/16
  */
-public class GugaAddMoreSubscriber<T> extends GugaListViewSubscriber<T> {
+public class GugaRemoveItemSubscriber<T> extends GugaListViewSubscriber<T> {
 
 
-    public GugaAddMoreSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList) {
+    public GugaRemoveItemSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList) {
         super(view, onCompleteList);
     }
 
-    public GugaAddMoreSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList, int initialPosition) {
+    public GugaRemoveItemSubscriber(GugaListMvpView view, Action1<List<T>> onCompleteList, int initialPosition) {
         super(view, onCompleteList, initialPosition);
     }
 
     @Override
     public void onCompleted() {
         super.onCompleted();
-        getView().notifyDataInserted(getInitialPosition(), getList().size());
+        getView().notifyDataRemoved(getInitialPosition(), getList().size());
     }
 }

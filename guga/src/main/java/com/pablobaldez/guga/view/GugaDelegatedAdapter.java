@@ -40,7 +40,7 @@ public class GugaDelegatedAdapter<VH extends RecyclerView.ViewHolder> extends Re
      * Will receive the basic adapter methods to handle the item views from a MvpView class
      * @param <VH> View holder to handle the list items
      */
-    interface Delegate<VH extends RecyclerView.ViewHolder> {
+    public interface Delegate<VH extends RecyclerView.ViewHolder> {
 
         /**
          * delegated method

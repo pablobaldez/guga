@@ -1,4 +1,4 @@
-package com.pablobaldez.guga.view;
+package com.pablobaldez.guga.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.pablobaldez.guga.R;
-import com.pablobaldez.guga.utils.ToastMessageManager;
+import com.pablobaldez.guga.view.GugaMvpView;
+import com.pablobaldez.guga.view.qmm.QuickMessageManager;
+import com.pablobaldez.guga.view.qmm.ToastMessageManager;
 import com.trello.navi.component.NaviFragment;
 
 /**
@@ -36,15 +38,14 @@ public abstract class GugaFragment extends NaviFragment implements GugaMvpView {
     @Override
     public void setLoadingState(boolean loadingState) {
         this.loadingState = loadingState;
-        if(isAdded()) {
-            if (progressBar != null) {
-                progressBar.setVisibility(loadingState ? View.VISIBLE : View.GONE);
-            }
+        if(shouldChangeProgressBar()) {
+            progressBar.setVisibility(loadingState ? View.VISIBLE : View.GONE);
         }
     }
 
     @Override
-    public void showGenericErrorMessage() {
+    public void setErrorState() {
+        setLoadingState(false);
         quickMessageManager.showMessage("Default error");
     }
 
@@ -71,6 +72,10 @@ public abstract class GugaFragment extends NaviFragment implements GugaMvpView {
      */
     public void setQuickMessageManager(QuickMessageManager quickMessageManager) {
         this.quickMessageManager = quickMessageManager;
+    }
+
+    protected boolean shouldChangeProgressBar() {
+        return isAdded() && progressBar != null;
     }
 
 }

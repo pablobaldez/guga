@@ -1,4 +1,4 @@
-package com.pablobaldez.guga.view;
+package com.pablobaldez.guga.view.qmm;
 
 import android.support.annotation.StringRes;
 

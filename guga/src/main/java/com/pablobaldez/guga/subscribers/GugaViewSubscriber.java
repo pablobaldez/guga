@@ -37,8 +37,7 @@ public class GugaViewSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onError(Throwable e) {
-        view.setLoadingState(false);
-        view.showGenericErrorMessage();
+        view.setErrorState();
     }
 
     @Override

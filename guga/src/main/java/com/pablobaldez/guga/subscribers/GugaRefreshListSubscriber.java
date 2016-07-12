@@ -7,6 +7,7 @@ import java.util.List;
 import rx.functions.Action1;
 
 /**
+ * Use this class to refresh all items on view
  * @author pablobaldez
  * @since 6/24/16
  */

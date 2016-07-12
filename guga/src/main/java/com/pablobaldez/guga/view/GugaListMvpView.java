@@ -46,4 +46,8 @@ public interface GugaListMvpView extends GugaMvpView {
      * @param toPosition current item position
      */
     void notifyDataMoved(int fromPosition, int toPosition);
+
+    void setMoreItemsToLoad(boolean moreItemsToLoad);
+
+    boolean hasMoreItemsToLoad();
 }

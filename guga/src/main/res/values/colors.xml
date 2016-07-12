@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="swipe_refresh_color_1">#D1C4E9</color>
+    <color name="swipe_refresh_color_2">#B39DDB</color>
+    <color name="swipe_refresh_color_3">#9575CD</color>
+    <color name="swipe_refresh_color_4">#7E57C2</color>
+
+</resources>

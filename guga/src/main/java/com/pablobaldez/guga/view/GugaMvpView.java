@@ -20,6 +20,6 @@ public interface GugaMvpView extends NaviComponent{
     /**
      * Show some generic message for uninteresting errors/exceptions
      */
-    void showGenericErrorMessage();
+    void setErrorState();
 
 }
