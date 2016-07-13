@@ -20,7 +20,7 @@ import com.pablobaldez.guga.view.wrappers.GugaRecyclerViewWrapper;
  * @since 7/12/16
  */
 public abstract class GugaRefreshCompatActivity<VH extends RecyclerView.ViewHolder>
-        extends GugaAppCompatActivity
+        extends GugaToolbarActivity
         implements GugaListMvpView, GugaDelegatedAdapter.Delegate<VH> {
 
     public RecyclerView recyclerView;
