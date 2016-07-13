@@ -46,7 +46,7 @@ public abstract class GugaFragment extends NaviFragment implements GugaMvpView {
     @Override
     public void setErrorState() {
         setLoadingState(false);
-        quickMessageManager.showMessage("Default error");
+        quickMessageManager.showMessage(R.string.guga_error_default_message);
     }
 
     /**

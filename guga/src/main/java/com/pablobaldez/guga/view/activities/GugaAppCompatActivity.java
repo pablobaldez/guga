@@ -19,7 +19,7 @@ public class GugaAppCompatActivity extends NaviAppCompatActivity implements Guga
     private QuickMessageManager quickMessageManager;
     private boolean loadingState;
 
-    private ProgressBar progressBar;
+    @Nullable private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +31,15 @@ public class GugaAppCompatActivity extends NaviAppCompatActivity implements Guga
     @Override
     public void setLoadingState(boolean loadingState) {
         this.loadingState = loadingState;
-        progressBar.setVisibility(loadingState ? View.VISIBLE : View.GONE);
+        if (progressBar != null) {
+            progressBar.setVisibility(loadingState ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
     public void setErrorState() {
         setLoadingState(false);
-        quickMessageManager.showMessage("Default error");
+        quickMessageManager.showMessage(R.string.guga_error_default_message);
     }
 
     /**

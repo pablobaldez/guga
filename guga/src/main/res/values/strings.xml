@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Guga</string>
+    <string name="guga_error_default_message">Default Message. Change it</string>
+    <string name="guga_app_name">Guga</string>
 </resources>

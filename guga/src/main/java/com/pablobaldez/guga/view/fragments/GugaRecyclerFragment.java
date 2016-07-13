@@ -23,7 +23,7 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
         extends GugaFragment
         implements GugaListMvpView, GugaDelegatedAdapter.Delegate<VH> {
 
-    @NonNull public RecyclerView recyclerView;
+    public RecyclerView recyclerView;
     @Nullable  public View emptyView;
 
     private GugaRecyclerViewWrapper viewWrapper;
