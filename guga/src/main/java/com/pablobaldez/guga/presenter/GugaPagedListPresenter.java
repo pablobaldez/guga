@@ -1,6 +1,6 @@
 package com.pablobaldez.guga.presenter;
 
-import com.pablobaldez.guga.subscribers.GugaAddItemSubscriber;
+import com.pablobaldez.guga.subscribers.GugaPaginationSubscriber;
 import com.pablobaldez.guga.subscribers.GugaRefreshListSubscriber;
 import com.pablobaldez.guga.view.GugaListMvpView;
 import com.pablobaldez.guga.view.PaginationManager;
@@ -46,7 +46,7 @@ public abstract class GugaPagedListPresenter<T> implements PaginationManager {
     @Override
     public void applyPagination() {
         page++;
-        Subscriber<T> subscriber = new GugaAddItemSubscriber<>(view, list::addAll);
+        Subscriber<T> subscriber = new GugaPaginationSubscriber<>(view, list::addAll);
         saveMainThreadIntoLifecycle(fillData(), view)
                 .subscribe(subscriber);
     }

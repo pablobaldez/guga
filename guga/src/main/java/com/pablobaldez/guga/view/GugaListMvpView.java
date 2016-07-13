@@ -28,8 +28,8 @@ public interface GugaListMvpView extends GugaMvpView {
     void notifyDataInserted(int initialPosition, int itemCount);
 
     /**
-     * Called when some data was inserted in data set
-     * @param itemCount number of items inserted
+     * Called when some data was inserted at final in data set
+     * @param itemCount number of items inserted at final of data set
      */
     void notifyDataInserted(int itemCount);
 
