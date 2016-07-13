@@ -1,14 +1,14 @@
 package com.pablobaldez.guga.view.activities;
 
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.pablobaldez.guga.R;
 import com.pablobaldez.guga.view.GugaMvpView;
 import com.pablobaldez.guga.view.qmm.QuickMessageManager;
-import com.pablobaldez.guga.view.qmm.ToastMessageManager;
+import com.pablobaldez.guga.view.qmm.SnackbarMessageManager;
 import com.trello.navi.component.NaviActivity;
 
 /**
@@ -23,22 +23,26 @@ public class GugaActivity extends NaviActivity implements GugaMvpView{
     private ProgressBar progressBar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        quickMessageManager = new ToastMessageManager(this);
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        quickMessageManager = new SnackbarMessageManager(view);
         progressBar = findProgressBar();
     }
 
     @Override
     public void setLoadingState(boolean loadingState) {
         this.loadingState = loadingState;
-        progressBar.setVisibility(loadingState ? View.VISIBLE : View.GONE);
+        if (progressBar != null) {
+            progressBar.setVisibility(loadingState ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
     public void setErrorState() {
         setLoadingState(false);
-        quickMessageManager.showMessage("Default error");
+        if (quickMessageManager != null) {
+            quickMessageManager.showMessage(getString(R.string.guga_error_default_message));
+        }
     }
 
     /**

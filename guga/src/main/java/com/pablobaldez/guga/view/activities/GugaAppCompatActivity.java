@@ -1,14 +1,14 @@
 package com.pablobaldez.guga.view.activities;
 
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.pablobaldez.guga.R;
 import com.pablobaldez.guga.view.GugaMvpView;
 import com.pablobaldez.guga.view.qmm.QuickMessageManager;
-import com.pablobaldez.guga.view.qmm.ToastMessageManager;
+import com.pablobaldez.guga.view.qmm.SnackbarMessageManager;
 import com.trello.navi.component.support.NaviAppCompatActivity;
 
 /**
@@ -22,9 +22,9 @@ public class GugaAppCompatActivity extends NaviAppCompatActivity implements Guga
     @Nullable private ProgressBar progressBar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        quickMessageManager = new ToastMessageManager(this);
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        quickMessageManager = new SnackbarMessageManager(view);
         progressBar = findProgressBar();
     }
 
@@ -39,7 +39,9 @@ public class GugaAppCompatActivity extends NaviAppCompatActivity implements Guga
     @Override
     public void setErrorState() {
         setLoadingState(false);
-        quickMessageManager.showMessage(R.string.guga_error_default_message);
+        if (quickMessageManager != null) {
+            quickMessageManager.showMessage(R.string.guga_error_default_message);
+        }
     }
 
     /**

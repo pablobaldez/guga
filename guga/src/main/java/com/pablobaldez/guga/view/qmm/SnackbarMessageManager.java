@@ -1,5 +1,6 @@
 package com.pablobaldez.guga.view.qmm;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -12,7 +13,7 @@ public class SnackbarMessageManager implements QuickMessageManager {
 
     private final View view;
 
-    public SnackbarMessageManager(View view) {
+    public SnackbarMessageManager(@NonNull View view) {
         this.view = view;
     }
 

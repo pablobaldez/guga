@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -19,7 +20,7 @@ import com.pablobaldez.guga.R;
  * @author pablobaldez
  * @since 7/13/16
  */
-public class DialogMessageManager extends DialogFragment implements QuickMessageManager{
+public class DialogMessageManager extends DialogFragment implements QuickMessageManager {
 
     public static final String FRAGMENT_TAG = "GUGA_DIALOG_TAG";
 
@@ -62,7 +63,7 @@ public class DialogMessageManager extends DialogFragment implements QuickMessage
     protected AlertDialog.Builder createBuilder(View rootView) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), getThemeStyle());
         builder.setView(rootView).setNeutralButton(android.R.string.ok, (dialog, which) -> {
-            dialog.dismiss();
+            onClickOk(dialog);
         });
         return builder;
     }
@@ -82,5 +83,9 @@ public class DialogMessageManager extends DialogFragment implements QuickMessage
     @StyleRes
     public int getThemeStyle() {
         return R.style.Guga_Theme_Dialog;
+    }
+
+    public void onClickOk(DialogInterface dialog) {
+        dialog.dismiss();
     }
 }

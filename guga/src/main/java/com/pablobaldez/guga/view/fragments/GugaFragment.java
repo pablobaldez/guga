@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import com.pablobaldez.guga.R;
 import com.pablobaldez.guga.view.GugaMvpView;
 import com.pablobaldez.guga.view.qmm.QuickMessageManager;
+import com.pablobaldez.guga.view.qmm.SnackbarMessageManager;
 import com.pablobaldez.guga.view.qmm.ToastMessageManager;
 import com.trello.navi.component.NaviFragment;
 
@@ -18,20 +19,15 @@ import com.trello.navi.component.NaviFragment;
  */
 public abstract class GugaFragment extends NaviFragment implements GugaMvpView {
 
-    private QuickMessageManager quickMessageManager;
+    @Nullable  private QuickMessageManager quickMessageManager;
     private boolean loadingState;
 
     private ProgressBar progressBar;
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        quickMessageManager = new ToastMessageManager(getActivity());
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        quickMessageManager = new SnackbarMessageManager(view);
         progressBar = findProgressBar(view);
     }
 
@@ -46,7 +42,9 @@ public abstract class GugaFragment extends NaviFragment implements GugaMvpView {
     @Override
     public void setErrorState() {
         setLoadingState(false);
-        quickMessageManager.showMessage(R.string.guga_error_default_message);
+        if (quickMessageManager != null) {
+            quickMessageManager.showMessage(R.string.guga_error_default_message);
+        }
     }
 
     /**
