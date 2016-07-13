@@ -18,16 +18,16 @@ public final class GugaSubscribers {
         return new GugaPaginationSubscriber(view, onCompleteList);
     }
 
+    public static <T> Subscriber<T> toRefresh(GugaListMvpView view, Action1<List<T>> onCompleteList) {
+        return new GugaRefreshListSubscriber<>(view, onCompleteList);
+    }
+
     public static <T> Subscriber<T> toAddNews(GugaListMvpView view, Action1<List<T>> onCompleteList) {
         return new GugaAddNewSubscriber<>(view, onCompleteList);
     }
 
     public static <T> Subscriber<T> toAddNews(GugaListMvpView view, Action1<List<T>> onCompleteList, int initialPosition) {
         return new GugaAddNewSubscriber<>(view, onCompleteList, initialPosition);
-    }
-
-    public static <T> Subscriber<T> toRefresh(GugaListMvpView view, Action1<List<T>> onCompleteList) {
-        return new GugaRefreshListSubscriber<>(view, onCompleteList);
     }
 
     public static <T> Subscriber<T> toChange(GugaListMvpView view, Action1<List<T>> onCompleteList) {
