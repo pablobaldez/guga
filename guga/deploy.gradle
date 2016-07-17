@@ -2,8 +2,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 def artifact = new Properties()
-artifact.load(new FileInputStream("deploy.settings"))
-
+artifact.load(project.rootProject.file('deploy.settings').newDataInputStream())
 version=artifact.version
 group=artifact.groupId
 
