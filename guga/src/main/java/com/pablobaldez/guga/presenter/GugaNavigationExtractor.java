@@ -13,19 +13,12 @@ import rx.Observable;
  * @author pablobaldez
  * @since 7/18/16
  */
-public abstract class GugaNavigationExtractor<T> implements NavigationExtractor<T>{
+public abstract class GugaNavigationExtractor<T> implements NavigationForResult<T>{
 
     private final GugaMvpView view;
-    private final String[] keys;
 
     public GugaNavigationExtractor(GugaMvpView view) {
         this.view = view;
-        keys = new String[0];
-    }
-
-    public GugaNavigationExtractor(GugaMvpView view, String... keys) {
-        this.view = view;
-        this.keys = keys;
     }
 
     @Override

@@ -16,9 +16,9 @@ public abstract class GugaNavigationFinisher<T> implements NavigationResultFinis
     }
 
     @Override
-    public void finish(int resultCode, T data) {
+    public void finish(T data) {
         Intent intent = mapToIntent(data);
-        activity.setResult(resultCode, intent);
+        activity.setResult(Activity.RESULT_OK, intent);
         activity.finish();
     }
 

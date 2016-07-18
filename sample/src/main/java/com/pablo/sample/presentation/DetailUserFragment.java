@@ -26,7 +26,9 @@ public class DetailUserFragment extends GugaFragment implements DetailUserView{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SampleApp app = (SampleApp) getActivity().getApplication();
-        presenter = new DetailUserPresenter(this, app.saveUserUseCase());
+        presenter = new DetailUserPresenter(this,
+                app.saveUserUseCase(),
+                new ListDetailNavigator.DetailResultFinisher(getActivity()));
     }
 
     @Nullable

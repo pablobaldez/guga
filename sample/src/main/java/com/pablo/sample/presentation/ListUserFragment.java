@@ -21,7 +21,11 @@ public class ListUserFragment extends GugaSwipeFragment<UserViewHolder>{
         super.onCreate(savedInstanceState);
         // use dependency injection here
         SampleApp app = (SampleApp) getActivity().getApplication();
-        presenter = new ListUserPresenter(this, app.getUserUseCase());
+        presenter = new ListUserPresenter(
+                this,
+                app.getUserUseCase(),
+                new ListDetailNavigator.ListDetailNavigation(this));
+        presenter.init();
     }
 
     @Override

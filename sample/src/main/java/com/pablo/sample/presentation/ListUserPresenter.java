@@ -1,8 +1,11 @@
 package com.pablo.sample.presentation;
 
+import android.util.Log;
+
 import com.pablo.sample.domain.GetUserUseCase;
 import com.pablo.sample.domain.User;
 import com.pablobaldez.guga.presenter.GugaPagedListPresenter;
+import com.pablobaldez.guga.presenter.NavigationForResult;
 import com.pablobaldez.guga.view.GugaListMvpView;
 
 import rx.Observable;
@@ -14,10 +17,20 @@ import rx.Observable;
 public class ListUserPresenter extends GugaPagedListPresenter<User> {
 
     private final GetUserUseCase useCase;
+    private final NavigationForResult navigation;
 
-    public ListUserPresenter(GugaListMvpView view, GetUserUseCase useCase) {
+    public ListUserPresenter(GugaListMvpView view,
+                             GetUserUseCase useCase,
+                             NavigationForResult navigation) {
         super(view);
         this.useCase = useCase;
+        this.navigation = navigation;
+    }
+
+    public void init(){
+        navigation.extract().subscribe(user -> {
+            Log.d("pablo", "on activity result");
+        });
     }
 
     @Override
@@ -31,6 +44,6 @@ public class ListUserPresenter extends GugaPagedListPresenter<User> {
     }
 
     public void onClickItem(int position) {
-
+        navigation.startForResult();
     }
 }

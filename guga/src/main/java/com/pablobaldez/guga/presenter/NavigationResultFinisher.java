@@ -5,5 +5,5 @@ package com.pablobaldez.guga.presenter;
  * @since 7/18/16
  */
 public interface NavigationResultFinisher<T> {
-    void finish(int resultCode, T t);
+    void finish(T t);
 }

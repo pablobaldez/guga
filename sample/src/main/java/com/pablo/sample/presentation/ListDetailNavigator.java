@@ -1,7 +1,6 @@
 package com.pablo.sample.presentation;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
@@ -9,8 +8,6 @@ import com.pablo.sample.domain.User;
 import com.pablobaldez.guga.presenter.ActivityResultChecker;
 import com.pablobaldez.guga.presenter.GugaNavigationExtractor;
 import com.pablobaldez.guga.presenter.GugaNavigationFinisher;
-import com.pablobaldez.guga.presenter.NavigationForResult;
-import com.pablobaldez.guga.view.GugaMvpView;
 import com.trello.navi.model.ActivityResult;
 
 /**
@@ -23,11 +20,12 @@ public class ListDetailNavigator  {
     private static final String NAME_KEY = "name_key";
     private static final String EMAIL_KEY = "email_key";
 
-    public static final class ToDetail implements NavigationForResult {
+    public static final class ListDetailNavigation extends GugaNavigationExtractor<User> {
 
-        private final Fragment fragment;
+        private final ListUserFragment fragment;
 
-        public ToDetail(Fragment fragment) {
+        public ListDetailNavigation(ListUserFragment fragment) {
+            super(fragment);
             this.fragment = fragment;
         }
 
@@ -36,13 +34,6 @@ public class ListDetailNavigator  {
             Activity activity = fragment.getActivity();
             Intent intent = new Intent(activity, DetailUserActivity.class);
             fragment.startActivityForResult(intent, REQUEST_CODE);
-        }
-    }
-
-    public static final class FromDetail extends GugaNavigationExtractor<User> {
-
-        public FromDetail(GugaMvpView view) {
-            super(view);
         }
 
         @Nullable
@@ -59,7 +50,7 @@ public class ListDetailNavigator  {
 
     public static final class DetailResultFinisher extends GugaNavigationFinisher<User> {
 
-        public DetailResultFinisher(DetailUserActivity activity) {
+        public DetailResultFinisher(Activity activity) {
             super(activity);
         }
 
@@ -71,5 +62,7 @@ public class ListDetailNavigator  {
             return intent;
         }
     }
+
+    private ListDetailNavigator(){}
 
 }
