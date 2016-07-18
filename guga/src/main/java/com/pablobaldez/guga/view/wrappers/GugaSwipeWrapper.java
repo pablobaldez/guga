@@ -4,8 +4,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.jakewharton.rxbinding.support.v4.widget.RxSwipeRefreshLayout;
 import com.pablobaldez.guga.R;
 import com.pablobaldez.guga.view.GugaListMvpView;
+
+import rx.functions.Action1;
 
 /**
  * @author pablobaldez
@@ -25,7 +28,10 @@ public class GugaSwipeWrapper extends GugaRecyclerViewWrapper {
     }
 
     public void setUpSwipe(SwipeRefreshLayout.OnRefreshListener onRefreshListener) {
-        swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
+        RxSwipeRefreshLayout.refreshes(swipeRefreshLayout).subscribe(aVoid -> {
+            onRefreshListener.onRefresh();
+        });
+
         swipeRefreshLayout.setColorSchemeColors(DEFAULT_SCHEME_COLORS);
     }
 

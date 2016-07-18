@@ -9,7 +9,6 @@ import com.pablobaldez.guga.R;
 import com.pablobaldez.guga.view.GugaMvpView;
 import com.pablobaldez.guga.view.qmm.QuickMessageManager;
 import com.pablobaldez.guga.view.qmm.SnackbarMessageManager;
-import com.pablobaldez.guga.view.qmm.ToastMessageManager;
 import com.trello.navi.component.NaviFragment;
 
 /**

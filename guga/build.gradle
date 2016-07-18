@@ -38,8 +38,11 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.0'
     // Rx for lifecycle
     compile 'com.trello:rxlifecycle-navi:0.6.1'
+
+    // Rx for views
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
 
     // to endless implementation
     compile 'com.vinaysshenoy:mugen:1.0.2'

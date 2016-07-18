@@ -1,6 +1,7 @@
 package com.pablobaldez.guga.presenter;
 
-import android.database.Observable;
+
+import rx.Observable;
 
 /**
  * Extract params from the previous screen and emit it using RxJava

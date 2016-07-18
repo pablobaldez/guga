@@ -21,10 +21,6 @@ public abstract class GugaSwipeFragment<VH extends RecyclerView.ViewHolder>
         extends GugaRecyclerFragment<VH>
         implements SwipeRefreshLayout.OnRefreshListener {
 
-    private static final int[] DEFAULT_SCHEME_COLORS =
-            new int[]{R.color.swipe_refresh_color_1, R.color.swipe_refresh_color_2,
-                    R.color.swipe_refresh_color_3, R.color.swipe_refresh_color_4};
-
     public SwipeRefreshLayout swipeRefreshLayout;
     private GugaSwipeWrapper swipeWrapper;
 
