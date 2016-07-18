@@ -14,6 +14,14 @@ import rx.functions.Action1;
  */
 public final class GugaSubscribers {
 
+    public static <T> Subscriber<T> toChangeLoadState(GugaListMvpView view){
+        return new GugaViewSubscriber<>(view);
+    }
+
+    public static <T> Subscriber<T> toChangeLoadState(GugaListMvpView view, Action1<T> onNextAction){
+        return new GugaViewSubscriber<>(view, onNextAction);
+    }
+
     public static <T> Subscriber<T> toPagination(GugaListMvpView view, Action1<List<T>> onCompleteList) {
         return new GugaPaginationSubscriber(view, onCompleteList);
     }

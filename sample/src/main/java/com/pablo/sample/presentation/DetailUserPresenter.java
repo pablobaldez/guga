@@ -17,30 +17,22 @@ public class DetailUserPresenter {
     private final SaveUserUseCase useCase;
     private final NavigationResultFinisher<User> finisher;
 
-    private User user;
-
     public DetailUserPresenter(DetailUserView view, SaveUserUseCase useCase, NavigationResultFinisher<User> finisher) {
         this.view = view;
         this.useCase = useCase;
         this.finisher = finisher;
-        user = new User();
-    }
-
-    public void init() {
-        view.bind(user);
     }
 
     public void save(User user) {
-        SubscriberToFinish subscriberToFinish = new SubscriberToFinish(view);
-
         RxUtils.saveMainThreadIntoLifecycle(useCase.save(user), view)
-                .subscribe(subscriberToFinish);
+                .subscribe(new SubscriberToFinish(view, user));
     }
 
     private final class SubscriberToFinish extends GugaViewSubscriber<User> {
-
-        public SubscriberToFinish(GugaMvpView view) {
+        final User user;
+        public SubscriberToFinish(GugaMvpView view, User user) {
             super(view);
+            this.user = user;
         }
 
         @Override

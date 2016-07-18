@@ -27,23 +27,19 @@ public class ActivityResultChecker {
         this.data = data;
     }
 
-    public boolean activityResponseOk(int expectedRequestCode){
-        boolean resultOk = resultCode == Activity.RESULT_OK;
-        boolean requestOk = requestCode == expectedRequestCode;
-        boolean dataNotNull = data != null;
-
-        return resultOk && requestOk && dataNotNull;
+    public boolean activityResponseOk(int expectedRequestCode) {
+        return resultCode == Activity.RESULT_OK &&
+                requestCode == expectedRequestCode &&
+                data != null;
     }
 
     public boolean activityResponseOk(int expectedRequestCode, String... expectedKeys){
-        boolean resultOK = activityResponseOk(expectedRequestCode);
-        boolean containKeys = containKeys(data, expectedKeys);
-        return resultOK && containKeys;
+        return activityResponseOk(expectedRequestCode) && containKeys(data, expectedKeys);
     }
 
     public boolean containKeys(Intent data, String... expectedKeys) {
         for (String key: expectedKeys) {
-            if (data.hasExtra(key)) {
+            if (!data.hasExtra(key)) {
                 return false;
             }
         }

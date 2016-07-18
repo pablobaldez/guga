@@ -16,12 +16,12 @@
         <android.support.v7.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{user.name}"/>
+            android:text="@={user.name}"/>
 
         <android.support.v7.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{user.email}"
+            android:text="@={user.email}"
             android:layout_marginBottom="@dimen/activity_vertical_margin"/>
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/save"

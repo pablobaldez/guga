@@ -1,14 +1,18 @@
 package com.pablo.sample.presentation;
 
-import android.util.Log;
-
 import com.pablo.sample.domain.GetUserUseCase;
 import com.pablo.sample.domain.User;
-import com.pablobaldez.guga.presenter.GugaPagedListPresenter;
 import com.pablobaldez.guga.navigation.NavigationForResult;
+import com.pablobaldez.guga.presenter.GugaPagedListPresenter;
+import com.pablobaldez.guga.subscribers.GugaSubscribers;
 import com.pablobaldez.guga.view.GugaListMvpView;
 
+import java.util.List;
+
 import rx.Observable;
+import rx.Subscriber;
+import rx.functions.Action0;
+import rx.functions.Action1;
 
 /**
  * @author Pablo
@@ -17,7 +21,7 @@ import rx.Observable;
 public class ListUserPresenter extends GugaPagedListPresenter<User> {
 
     private final GetUserUseCase useCase;
-    private final NavigationForResult navigation;
+    private final NavigationForResult<User> navigation;
 
     public ListUserPresenter(GugaListMvpView view,
                              GetUserUseCase useCase,
@@ -29,7 +33,14 @@ public class ListUserPresenter extends GugaPagedListPresenter<User> {
 
     public void init(){
         navigation.extract().subscribe(user -> {
-            Log.d("pablo", "on activity result");
+            list.add(user);
+        }, throwable -> {
+
+        }, new Action0() {
+            @Override
+            public void call() {
+                getView().notifyDataInserted(1);
+            }
         });
     }
 
@@ -43,7 +54,7 @@ public class ListUserPresenter extends GugaPagedListPresenter<User> {
         }
     }
 
-    public void onClickItem(int position) {
+    public void onClickItem() {
         navigation.startForResult();
     }
 }

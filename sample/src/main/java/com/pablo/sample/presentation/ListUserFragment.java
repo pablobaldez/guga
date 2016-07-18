@@ -25,8 +25,6 @@ public class ListUserFragment extends GugaSwipeFragment<UserViewHolder>{
                 this,
                 app.getUserUseCase(),
                 new ListDetailNavigator.ListDetailNavigation(this));
-
-
         presenter.init();
     }
 
@@ -47,7 +45,7 @@ public class ListUserFragment extends GugaSwipeFragment<UserViewHolder>{
         User user = presenter.get(position);
 
         holder.bindView(user);
-        holder.itemView.setOnClickListener(view -> presenter.onClickItem(position));
+        holder.itemView.setOnClickListener(view -> presenter.onClickItem());
     }
 
     @Override
