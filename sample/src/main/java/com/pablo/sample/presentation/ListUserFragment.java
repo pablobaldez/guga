@@ -36,9 +36,12 @@ public class ListUserFragment extends GugaSwipeFragment<UserViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(UserViewHolder holder, int position) {
+    public void onBindViewHolder(UserViewHolder holder, final int position) {
+        // this get call is not MVP, but let's break the contract for a good reason
         User user = presenter.get(position);
-        holder.userBinding.setUser(user);
+
+        holder.bindView(user);
+        holder.itemView.setOnClickListener(view -> presenter.onClickItem(position));
     }
 
     @Override

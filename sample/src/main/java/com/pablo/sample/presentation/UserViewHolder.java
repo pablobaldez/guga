@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.pablo.sample.R;
 import com.pablo.sample.databinding.ItemUserBinding;
+import com.pablo.sample.domain.User;
 
 /**
  * @author Pablo
@@ -19,11 +20,17 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         return new UserViewHolder(userBinding);
     }
 
-    public final ItemUserBinding userBinding;
+    private final ItemUserBinding userBinding;
 
     private UserViewHolder(ItemUserBinding userBinding) {
         super(userBinding.getRoot());
         this.userBinding = userBinding;
+        this.userBinding.executePendingBindings();
+    }
+
+    public void bindView(User user){
+        userBinding.setUser(user);
+
     }
 
 }

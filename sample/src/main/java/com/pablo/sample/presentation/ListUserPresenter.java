@@ -29,4 +29,8 @@ public class ListUserPresenter extends GugaPagedListPresenter<User> {
             return useCase.get(getPage());
         }
     }
+
+    public void onClickItem(int position) {
+
+    }
 }

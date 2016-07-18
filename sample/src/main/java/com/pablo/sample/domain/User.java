@@ -5,9 +5,10 @@ package com.pablo.sample.domain;
  * @since 17/07/2016
  */
 public class User {
-
     public String name;
     public String email;
+
+    public User(){}
 
     public User(String name, String email) {
         this.name = name;
