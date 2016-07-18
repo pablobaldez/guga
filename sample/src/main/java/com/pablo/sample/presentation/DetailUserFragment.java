@@ -41,15 +41,12 @@ public class DetailUserFragment extends GugaFragment implements DetailUserView{
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = DataBindingUtil.bind(view);
-        bind(new User());
-        binding.save.setOnClickListener(v -> {
-            binding.executePendingBindings();
-            presenter.save(binding.getUser());
-        });
+        presenter.init();
     }
 
     @Override
     public void bind(User user) {
         binding.setUser(user);
+        binding.save.setOnClickListener(v -> presenter.save());
     }
 }

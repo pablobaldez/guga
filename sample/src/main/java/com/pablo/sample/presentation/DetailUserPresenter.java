@@ -3,9 +3,11 @@ package com.pablo.sample.presentation;
 import com.pablo.sample.domain.SaveUserUseCase;
 import com.pablo.sample.domain.User;
 import com.pablobaldez.guga.navigation.NavigationResultFinisher;
-import com.pablobaldez.guga.subscribers.GugaViewSubscriber;
+import com.pablobaldez.guga.subscribers.GugaSubscribers;
 import com.pablobaldez.guga.utils.RxUtils;
-import com.pablobaldez.guga.view.GugaMvpView;
+
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * @author Pablo
@@ -17,28 +19,23 @@ public class DetailUserPresenter {
     private final SaveUserUseCase useCase;
     private final NavigationResultFinisher<User> finisher;
 
+    private User currentUser;
+
     public DetailUserPresenter(DetailUserView view, SaveUserUseCase useCase, NavigationResultFinisher<User> finisher) {
         this.view = view;
         this.useCase = useCase;
         this.finisher = finisher;
     }
 
-    public void save(User user) {
-        RxUtils.saveMainThreadIntoLifecycle(useCase.save(user), view)
-                .subscribe(new SubscriberToFinish(view, user));
+    public void init(){
+        currentUser = new User();
+        view.bind(currentUser);
     }
 
-    private final class SubscriberToFinish extends GugaViewSubscriber<User> {
-        final User user;
-        public SubscriberToFinish(GugaMvpView view, User user) {
-            super(view);
-            this.user = user;
-        }
-
-        @Override
-        public void onCompleted() {
-            super.onCompleted();
-            finisher.finish(user);
-        }
+    public void save() {
+        Observable<User> saveObservable = useCase.save(currentUser);
+        Subscriber<User> subscriber = GugaSubscribers.onComplete(() -> finisher.finish(currentUser));
+        RxUtils.saveMainThreadIntoLifecycle(saveObservable, view)
+                .subscribe(subscriber);
     }
 }

@@ -5,6 +5,7 @@ import com.pablobaldez.guga.view.GugaListMvpView;
 import java.util.List;
 
 import rx.Subscriber;
+import rx.functions.Action0;
 import rx.functions.Action1;
 
 /**
@@ -54,8 +55,16 @@ public final class GugaSubscribers {
         return new GugaRemoveItemSubscriber<>(view, onCompleteList, initialPosition);
     }
 
+    public static <T> Subscriber<T> onComplete(Action0 onComplete){
+        return new GugaOnCompleteSubscriber<T>() {
+            @Override
+            public void onCompleted() {
+                onComplete.call();
+            }
+        };
+    }
+
     private GugaSubscribers() {
         // disable instances
     }
-
 }
