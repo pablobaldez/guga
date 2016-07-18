@@ -2,12 +2,10 @@ package com.pablo.sample.presentation;
 
 import com.pablo.sample.domain.SaveUserUseCase;
 import com.pablo.sample.domain.User;
-import com.pablobaldez.guga.presenter.NavigationResultFinisher;
+import com.pablobaldez.guga.navigation.NavigationResultFinisher;
 import com.pablobaldez.guga.subscribers.GugaViewSubscriber;
 import com.pablobaldez.guga.utils.RxUtils;
 import com.pablobaldez.guga.view.GugaMvpView;
-
-import rx.Subscriber;
 
 /**
  * @author Pablo
@@ -32,15 +30,16 @@ public class DetailUserPresenter {
         view.bind(user);
     }
 
-    public void save() {
-        Finisher finisher = new Finisher(view);
+    public void save(User user) {
+        SubscriberToFinish subscriberToFinish = new SubscriberToFinish(view);
+
         RxUtils.saveMainThreadIntoLifecycle(useCase.save(user), view)
-                .subscribe(finisher);
+                .subscribe(subscriberToFinish);
     }
 
-    private final class Finisher extends GugaViewSubscriber<User> {
+    private final class SubscriberToFinish extends GugaViewSubscriber<User> {
 
-        public Finisher(GugaMvpView view) {
+        public SubscriberToFinish(GugaMvpView view) {
             super(view);
         }
 

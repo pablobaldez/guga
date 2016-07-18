@@ -1,4 +1,4 @@
-package com.pablobaldez.guga.presenter;
+package com.pablobaldez.guga.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,11 +7,11 @@ import android.content.Intent;
  * @author pablobaldez
  * @since 7/18/16
  */
-public abstract class GugaNavigationFinisher<T> implements NavigationResultFinisher<T> {
+public abstract class GugaNavigationResultFinisher<T> implements NavigationResultFinisher<T> {
 
     private final Activity activity;
 
-    public GugaNavigationFinisher(Activity activity) {
+    public GugaNavigationResultFinisher(Activity activity) {
         this.activity = activity;
     }
 

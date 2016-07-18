@@ -5,7 +5,7 @@ import android.util.Log;
 import com.pablo.sample.domain.GetUserUseCase;
 import com.pablo.sample.domain.User;
 import com.pablobaldez.guga.presenter.GugaPagedListPresenter;
-import com.pablobaldez.guga.presenter.NavigationForResult;
+import com.pablobaldez.guga.navigation.NavigationForResult;
 import com.pablobaldez.guga.view.GugaListMvpView;
 
 import rx.Observable;

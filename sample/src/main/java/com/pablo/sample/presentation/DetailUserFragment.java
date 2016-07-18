@@ -28,7 +28,7 @@ public class DetailUserFragment extends GugaFragment implements DetailUserView{
         SampleApp app = (SampleApp) getActivity().getApplication();
         presenter = new DetailUserPresenter(this,
                 app.saveUserUseCase(),
-                new ListDetailNavigator.DetailResultFinisher(getActivity()));
+                new ListDetailNavigator.DetailResultResultFinisher(getActivity()));
     }
 
     @Nullable
@@ -42,7 +42,10 @@ public class DetailUserFragment extends GugaFragment implements DetailUserView{
         super.onViewCreated(view, savedInstanceState);
         binding = DataBindingUtil.bind(view);
         presenter.init();
-        view.findViewById(R.id.save).setOnClickListener(v -> presenter.save());
+        view.findViewById(R.id.save).setOnClickListener(view1 -> {
+            binding.executePendingBindings();
+            presenter.save(binding.getUser());
+        });
     }
 
     @Override

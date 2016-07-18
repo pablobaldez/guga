@@ -5,22 +5,22 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import com.pablo.sample.domain.User;
-import com.pablobaldez.guga.presenter.ActivityResultChecker;
-import com.pablobaldez.guga.presenter.GugaNavigationExtractor;
-import com.pablobaldez.guga.presenter.GugaNavigationFinisher;
+import com.pablobaldez.guga.navigation.ActivityResultChecker;
+import com.pablobaldez.guga.navigation.GugaNavigationExtractor;
+import com.pablobaldez.guga.navigation.GugaNavigationResultFinisher;
 import com.trello.navi.model.ActivityResult;
 
 /**
  * @author pablobaldez
  * @since 7/18/16
  */
-public class ListDetailNavigator  {
+public interface ListDetailNavigator  {
 
-    private static final int REQUEST_CODE = 12;
-    private static final String NAME_KEY = "name_key";
-    private static final String EMAIL_KEY = "email_key";
+    int REQUEST_CODE = 12;
+    String NAME_KEY = "name_key";
+    String EMAIL_KEY = "email_key";
 
-    public static final class ListDetailNavigation extends GugaNavigationExtractor<User> {
+    final class ListDetailNavigation extends GugaNavigationExtractor<User> {
 
         private final ListUserFragment fragment;
 
@@ -48,9 +48,9 @@ public class ListDetailNavigator  {
         }
     }
 
-    public static final class DetailResultFinisher extends GugaNavigationFinisher<User> {
+    final class DetailResultResultFinisher extends GugaNavigationResultFinisher<User> {
 
-        public DetailResultFinisher(Activity activity) {
+        public DetailResultResultFinisher(Activity activity) {
             super(activity);
         }
 
@@ -62,7 +62,5 @@ public class ListDetailNavigator  {
             return intent;
         }
     }
-
-    private ListDetailNavigator(){}
 
 }

@@ -30,7 +30,6 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
 
     public void bindView(User user){
         userBinding.setUser(user);
-
     }
 
 }

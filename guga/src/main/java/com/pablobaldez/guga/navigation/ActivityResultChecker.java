@@ -1,4 +1,4 @@
-package com.pablobaldez.guga.presenter;
+package com.pablobaldez.guga.navigation;
 
 import android.app.Activity;
 import android.content.Intent;
