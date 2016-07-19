@@ -1,6 +1,6 @@
 siteUrl = https://github.com/pablobaldez/guga
 gitUrl = https://github.com/pablobaldez/guga.git
 issueUrl = https://github.com/pablobaldez/guga/issues
-version = 0.0.9
+version = 0.0.10
 groupId = com.pablobaldez
 id = guga
