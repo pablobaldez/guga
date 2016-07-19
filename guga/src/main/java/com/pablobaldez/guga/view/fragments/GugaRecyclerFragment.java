@@ -27,7 +27,6 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
     @Nullable  public View emptyView;
 
     private GugaRecyclerViewWrapper viewWrapper;
-    private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter<VH> adapter;
     private int itemCount = 0;
     private boolean moreItemsToLoad = false;
@@ -36,7 +35,6 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = createAdapter();
-        layoutManager = createLayoutManager();
     }
 
     @NonNull
@@ -85,6 +83,7 @@ public abstract class GugaRecyclerFragment<VH extends RecyclerView.ViewHolder>
 
     public void setUpRecyclerView() {
         viewWrapper = new GugaRecyclerViewWrapper(this, recyclerView, emptyView);
+        RecyclerView.LayoutManager layoutManager = createLayoutManager();
         viewWrapper.setUpRecyclerView(layoutManager, adapter);
     }
 

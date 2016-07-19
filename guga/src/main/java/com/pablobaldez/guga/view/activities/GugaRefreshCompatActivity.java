@@ -28,7 +28,6 @@ public abstract class GugaRefreshCompatActivity<VH extends RecyclerView.ViewHold
     public View emptyView;
 
     private GugaRecyclerViewWrapper viewWrapper;
-    private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter<VH> adapter;
     private int itemCount = 0;
     private boolean moreItemsToLoad = false;
@@ -38,7 +37,6 @@ public abstract class GugaRefreshCompatActivity<VH extends RecyclerView.ViewHold
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         adapter = createAdapter();
-        layoutManager = createLayoutManager();
     }
 
     @NonNull
@@ -79,6 +77,7 @@ public abstract class GugaRefreshCompatActivity<VH extends RecyclerView.ViewHold
 
     public void setUpRecyclerView() {
         viewWrapper = new GugaRecyclerViewWrapper(this, recyclerView, emptyView);
+        RecyclerView.LayoutManager layoutManager = createLayoutManager();
         viewWrapper.setUpRecyclerView(layoutManager, adapter);
     }
 
